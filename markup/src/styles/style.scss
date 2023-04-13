@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@100;400&display=swap');
+// 1. Configuration and helpers
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+
+// 2. Vendors: include media mixins and mormalize imported from node_modules
+@import '~include-media/dist/include-media';
+@import 'vendors/normalize';
+@import 'vendors/icomoon/styles';
+
+// 3. Base styles and elements
+@import 'base/base';
+@import 'base/helpers';
+@import 'base/fonts';
+@import 'base/typography';
+@import 'base/forms';
+
+
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: radial-gradient(69.38% 69.38% at 50% 50%, #31A87A 0%, #006847 100%);
+  animation: bg-change 6s infinite;
+  box-shadow: inset 0 0 200px 200px rgba($black, .75);
+}
+
+@keyframes bg-change {
+  0% {
+    background: #006847;
+  }
+  20% {
+    background: #893B67;
+  }
+  100% {
+    background: #1C1B64;
+  }
+}
+
+.main-board {
+  margin: auto;
+  width: 1000px;
+  height: 500px;
+  background: linear-gradient(to bottom, #343A40, #0096C7);
+  border: 2px solid $white;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  padding: 40px;
+  transition: box-shadow .3s ease;
+  position: relative;
+
+  &:hover {
+    box-shadow: 0 0 10px 10px rgba($white, .2), inset 0 0 10px 10px rgba($black, .2);
+  }
+}
+
+.game-title {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  color: $white;
+  letter-spacing: 3px;
+}
+
+[class*='btn-'] {
+  width: 40px;
+  height: 40px;
+  border: 2px solid $white;
+  background: linear-gradient(to bottom, #343A40, #0096C7);
+  border-radius: 9999px;
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all .3s ease;
+
+  &:hover {
+    box-shadow: 0 0 10px 10px rgba($white, .2), inset 0 0 10px 10px rgba($black, .2);
+  }
+}
+
+.btn-top {
+  align-self: flex-start;
+}
+
+.btn-down {
+  align-self: flex-end;
+}
+
+.controls {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid $white;
+  background: $black;
+  border-radius: 50%;
+  padding: 20px;
+
+  [class*='btn-'] {
+    margin: -5px;
+  }
+
+  .btn-down {
+    margin-left: -34px;
+  }
+}
+
+.btn-start {
+  width: 100px;
+  height: 100px;
+  text-transform: uppercase;
+  font: 24px/1.2 'Bebas Neue', Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.game-screen {
+  width: 600px;
+  height: 400px;
+  margin: auto;
+  outline: 2px solid $white;
+  background: $black;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.score {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 2px solid $white;
+  background: linear-gradient(to bottom, #343A40, #0096C7);
+  min-width: 60px;
+  font-size: 20px;
+  line-height: 1.4;
+  border-radius: 20px;
+  text-align: center;
+  padding: 5px;
+  z-index: 2;
+}
+
+.welcome-text {
+  font-weight: 200;
+  font-size: 36px;
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: 3px;
+  text-shadow: 0 0 5px $black;
+}
+
+.welcome-image {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: -1;
+  opacity: 0.5;
+  animation: peep 8s infinite;
+}
+
+@keyframes peep {
+  0% {
+    transform: translateY(100%);
+  }
+  25% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.goose {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 50px;
+  height: 79px;
+  transition: all .25s ease;
+  visibility: hidden;
+
+  .is-started & {
+    visibility: visible;
+  }
+}
+
+[class*='spahe-'] {
+  width: 40px;
+  height: 40px;
+  fill: $white;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transition: all .25s ease;
+  z-index: 1;
+  animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    rotate: 0;
+  }
+  100% {
+    rotate: 360deg;
+  }
+}
+
+.leg {
+  transform-origin: 50% 0;
+  animation: shake 0.2s linear infinite;
+
+  + .leg {
+    animation-delay: 0.1s;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
+}
+
+.spahe-bug {
+  fill:#31A87A;
+  width: 30px;
+  height: 30px;
+}
+
+.spahe-pacman {
+  width: 50px;
+  height: 50px;
+  fill: #893B67;
+  animation-duration: 3.5s;
+}
+
+.spahe-IE {
+  fill: blue;
+  animation-duration: 1.5s;
+}
+
+.spahe-clubs {
+  width: 35px;
+  height: 35px;
+  fill: #0096C7;
+}
+
+.spahe-diamonds {
+  fill: orange;
+  animation-duration: 1s;
+}
+
+.spahe-evil {
+  fill: yellow;
+  width: 65px;
+  height: 65px;
+}
+
+.spahe-heart {
+  width: 25px;
+  height: 25px;
+  fill: red;
+}
+
+.is-started {
+  .goose {
+    display: block;
+  }
+
+  .welcome-text {
+    display: none;
+  }
+  .welcome-image {
+    display: none;
+  }
+}
